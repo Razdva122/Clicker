@@ -1,16 +1,16 @@
 {
   "files": {
-    "main.css": "/clicker/static/css/main.073c9b0a.css",
-    "main.js": "/clicker/static/js/main.d56da669.js",
-    "static/js/787.b407a47b.chunk.js": "/clicker/static/js/787.b407a47b.chunk.js",
-    "static/media/logo.svg": "/clicker/static/media/logo.6ce24c58023cc2f8fd88fe9d219db6c6.svg",
-    "index.html": "/clicker/index.html",
-    "main.073c9b0a.css.map": "/clicker/static/css/main.073c9b0a.css.map",
-    "main.d56da669.js.map": "/clicker/static/js/main.d56da669.js.map",
-    "787.b407a47b.chunk.js.map": "/clicker/static/js/787.b407a47b.chunk.js.map"
+    "main.css": "/Clicker/static/css/main.073c9b0a.css",
+    "main.js": "/Clicker/static/js/main.464cef77.js",
+    "static/js/787.b407a47b.chunk.js": "/Clicker/static/js/787.b407a47b.chunk.js",
+    "static/media/logo.svg": "/Clicker/static/media/logo.6ce24c58023cc2f8fd88fe9d219db6c6.svg",
+    "index.html": "/Clicker/index.html",
+    "main.073c9b0a.css.map": "/Clicker/static/css/main.073c9b0a.css.map",
+    "main.464cef77.js.map": "/Clicker/static/js/main.464cef77.js.map",
+    "787.b407a47b.chunk.js.map": "/Clicker/static/js/787.b407a47b.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.073c9b0a.css",
-    "static/js/main.d56da669.js"
+    "static/js/main.464cef77.js"
   ]
 }
