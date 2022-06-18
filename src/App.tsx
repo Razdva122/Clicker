@@ -1,23 +1,31 @@
-import React from 'react';
+import React, { useState } from 'react';
 import logo from './logo.svg';
 import './App.css';
 
 function App() {
+	const [money, setMoney] = useState(0);
+	const [upgrade, setUpgrade] = useState(1);
+
+	function buyUpgrade() {
+		setMoney(money - upgradeCost());
+		setUpgrade(upgrade + 1);
+	}
+
+	function upgradeCost() {
+		return Math.pow(2, upgrade);
+	}
+
   return (
-    <div className="App">
+    <div className="App" >
       <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
+				<p>Заработок с клика: {upgrade} $</p>
+				<p>Баланс: {money} $</p>
+				<div onClick={() => setMoney(money + 1)}>
+					<img src={logo} className="App-logo" alt="logo"/>
+				</div>
+				<button disabled={upgradeCost() > money} onClick={() => buyUpgrade()}>
+					Купить улучшение за {upgradeCost()} $
+				</button>
       </header>
     </div>
   );
