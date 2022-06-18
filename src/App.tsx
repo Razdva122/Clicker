@@ -20,7 +20,7 @@ function App() {
       <header className="App-header">
 				<p>Заработок с клика: {upgrade} $</p>
 				<p>Баланс: {money} $</p>
-				<div onClick={() => setMoney(money + 1)}>
+				<div onClick={() => setMoney(money + upgrade)}>
 					<img src={logo} className="App-logo" alt="logo"/>
 				</div>
 				<button disabled={upgradeCost() > money} onClick={() => buyUpgrade()}>
