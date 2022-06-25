@@ -7,6 +7,7 @@ import {
 } from "react-router-dom";
 import './index.css';
 import Main from './pages/main';
+import Shop from './pages/shop';
 import reportWebVitals from './reportWebVitals';
 
 const root = ReactDOM.createRoot(
@@ -16,9 +17,8 @@ root.render(
 	<BrowserRouter>
 		<React.StrictMode>
 			<Routes>
-				<Route path="/" element={<Main />}>
-					<Route path="shop" element={<Main />} />
-				</Route>
+				<Route path="/" element={<Main />} />
+				<Route path="shop" element={<Shop />} />
 			</Routes>
 		</React.StrictMode>
 	</BrowserRouter>
