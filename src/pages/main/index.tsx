@@ -1,13 +1,14 @@
 import React, { useState, useEffect, useRef } from 'react';
+import { Link } from "react-router-dom";
 import logo from '../../logo.svg';
 import './style.css';
 import { IGameState } from './interface';
 import { GAME_STATE_PATH } from './const';
 
-import Miner from '../miner';
-import BuyMinerButton from '../buyMinerButton';
+import Miner from '../../components/miner';
+import BuyMinerButton from '../../components/buyMinerButton';
 
-function Game() {
+function Main() {
 	const [gameState, setGameState] = useState<IGameState>({
 		balance: 0,
 		clickCost: 1,
@@ -81,6 +82,7 @@ function Game() {
 				<div onClick={earnMoney}>
 					<img src={logo} className="App-logo" alt="logo"/>
 				</div>
+				<Link to="/shop">Магазин</Link>
 				<button disabled={upgradeCost() > gameState.balance} onClick={buyUpgrade}>
 					Купить улучшение за {upgradeCost()} $
 				</button>
@@ -89,4 +91,4 @@ function Game() {
   );
 }
 
-export default Game;
+export default Main;
