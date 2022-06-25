@@ -82,7 +82,7 @@ function Main() {
 				<div onClick={earnMoney}>
 					<img src={logo} className="App-logo" alt="logo"/>
 				</div>
-				<Link to="/shop">Магазин</Link>
+				<Link to="/Clicker/shop">Магазин</Link>
 				<button disabled={upgradeCost() > gameState.balance} onClick={buyUpgrade}>
 					Купить улучшение за {upgradeCost()} $
 				</button>

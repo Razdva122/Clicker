@@ -17,8 +17,8 @@ root.render(
 	<BrowserRouter>
 		<React.StrictMode>
 			<Routes>
-				<Route path="/" element={<Main />} />
-				<Route path="shop" element={<Shop />} />
+				<Route path="/Clicker" element={<Main />} />
+				<Route path="/Clicker/shop" element={<Shop />} />
 			</Routes>
 		</React.StrictMode>
 	</BrowserRouter>
