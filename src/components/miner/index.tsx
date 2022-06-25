@@ -1,4 +1,5 @@
 import React, { FC, useState, useEffect } from 'react';
+import { useInterval } from '../../hooks';
 import ProgressBar from '../progressBar';
 import { IMinerProps, IMinerState } from './interface';
 import { secondsToText } from './helpers';
@@ -9,45 +10,39 @@ const Miner: FC<IMinerProps> = (props) => {
 
 	const [minerState, setMinerState] = useState<IMinerState>({timer: secondsToText(timer), progress: 0});
 
-	useEffect(() => {
-		const intervalPercent = timer * 1000 / 100;
-		const isPercentTimer = intervalPercent < 1000;
+	const intervalPercent = timer * 1000 / 100;
+	const isPercentTimer = intervalPercent < 1000;
 
-    const intervalID = setInterval(() => {
-			if (minerState.progress >= 100) {
-				setMinerState({
-					timer: secondsToText(timer),
-					progress: 0
-				});
+	useInterval(() => {
+		if (minerState.progress >= 100) {
+			setMinerState({
+				timer: secondsToText(timer),
+				progress: 0
+			});
 
-				onSuccess();
-			} else {
-				
-				setMinerState((prevState) => {
-					let timeLeft;
-					let progress;
+			onSuccess();
+		} else {
+			
+			setMinerState((prevState) => {
+				let timeLeft;
+				let progress;
 
 
-					if (isPercentTimer) {
-						timeLeft = timer - Math.floor(intervalPercent / 1000 * prevState.progress);
-						progress = 1;
-					} else {
-						timeLeft = Math.floor(timer - (prevState.progress / 100 * timer));
-						progress = 100 / timer;
-					}
+				if (isPercentTimer) {
+					timeLeft = timer - Math.floor(intervalPercent / 1000 * prevState.progress);
+					progress = 1;
+				} else {
+					timeLeft = Math.floor(timer - (prevState.progress / 100 * timer));
+					progress = 100 / timer;
+				}
 
-					return {
-						timer: timeLeft > 3 ? secondsToText(timeLeft) : `+ ${profit}$`,
-						progress: prevState.progress + progress
-					}
-				})
-			}
-		}, isPercentTimer ? intervalPercent : 1000);
-
-		return () => {
-			clearInterval(intervalID);
+				return {
+					timer: timeLeft > 3 ? secondsToText(timeLeft) : `+ ${profit}$`,
+					progress: prevState.progress + progress
+				}
+			})
 		}
-  }, [timer, onSuccess, minerState.progress, profit]);
+	},isPercentTimer ? intervalPercent : 1000);
 
   const array = new Array(amount).fill(null);
 
