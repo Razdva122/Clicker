@@ -1,6 +1,7 @@
 import React, { FC, useState } from 'react';
-import { useInterval } from '../../hooks';
-import ProgressBar from '../progressBar';
+import { useInterval } from '@/hooks';
+import ProgressBar from '@/components/progressBar';
+
 import { IMinerProps, IMinerState } from './interface';
 import { secondsToText } from './helpers';
 

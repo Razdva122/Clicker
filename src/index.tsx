@@ -6,20 +6,31 @@ import {
   Route
 } from "react-router-dom";
 import './index.css';
-import Main from './pages/main';
-import Shop from './pages/shop';
-import reportWebVitals from './reportWebVitals';
+import reportWebVitals from '@/reportWebVitals';
+import { Provider } from "mobx-react";
+
+import Main from '@/pages/main';
+import Shop from '@/pages/shop';
+
+import GameStore from '@/store';
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
 );
+
+const stores = {
+	gameStore: new GameStore()
+};
+
 root.render(
 	<BrowserRouter>
 		<React.StrictMode>
-			<Routes>
-				<Route path="/Clicker" element={<Main />} />
-				<Route path="/Clicker/shop" element={<Shop />} />
-			</Routes>
+			<Provider {...stores}>
+				<Routes>
+					<Route path="*" element={<Main />} />
+					<Route path="/shop" element={<Shop />} />
+				</Routes>
+			</Provider>
 		</React.StrictMode>
 	</BrowserRouter>
 );

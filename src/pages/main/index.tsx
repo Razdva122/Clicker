@@ -1,94 +1,54 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React from 'react';
+import { observer, inject } from "mobx-react";
 import { Link } from "react-router-dom";
-import logo from '../../logo.svg';
+import logo from '@/logo.svg';
+
+import Miner from '@/components/miner';
+import BuyMinerButton from '@/components/buyMinerButton';
+
 import './style.css';
-import { IGameState } from './interface';
-import { GAME_STATE_PATH } from './const';
+import GameStore from '@/store';
 
-import Miner from '../../components/miner';
-import BuyMinerButton from '../../components/buyMinerButton';
-
-function Main() {
-	const [gameState, setGameState] = useState<IGameState>({
-		balance: 0,
-		clickCost: 1,
-		minersAmount: 0,
-		minersProfit: 5,
-		version: '0.0.2'
-	});
-
-	const mounted = useRef<boolean>();
-
-	useEffect(() => {
-	 if (!mounted.current) {
-		mounted.current = true;
-
-		const prevState = localStorage.getItem(GAME_STATE_PATH);
-		
-		if (prevState) {
-			const parsedState = JSON.parse(prevState);
-
-			if (parsedState.version === gameState.version) {
-				setGameState(parsedState);
-			}
-		}
-
-	 } else {
-		localStorage.setItem(GAME_STATE_PATH, JSON.stringify(gameState));
-	 }
-	}, [gameState])
+const Main = inject("gameStore")(observer((props: {gameStore?: GameStore}) => {
+	const gameStore = props.gameStore!;
 
 	function earnMoney() {
-		setGameState((prevState) => ({
-			...prevState, 
-			balance: prevState.balance + prevState.clickCost
-		}))
+		gameStore.updateStore('balance', gameStore.balance + gameStore.clickCost)
 	}
 
 	function minerProfit() {
-		setGameState((prevState) => ({
-			...prevState,
-			balance: prevState.balance + (prevState.minersAmount * prevState.minersProfit)
-		}));
+		gameStore.updateStore('balance', gameStore.balance + gameStore.minersAmount * gameStore.minersProfit)
 	}
 
 	function buyUpgrade() {
-		setGameState((prevState) => ({
-			...prevState, 
-			balance: prevState.balance - upgradeCost(), 
-			clickCost: prevState.clickCost + 1,
-		}))
+		gameStore.updateStore('balance', gameStore.balance - gameStore.upgradeCost)
+		gameStore.updateStore('clickCost', gameStore.clickCost + 1)
 	}
 
 	function buyMiner(costOfMiner: number) {
-		setGameState((prevState) => ({
-			...prevState, 
-			balance: prevState.balance - costOfMiner, 
-			minersAmount: prevState.minersAmount + 1,
-		}))
-	}
-
-	function upgradeCost() {
-		return Math.pow(2, gameState.clickCost);
+		gameStore.updateStore('balance', gameStore.balance - costOfMiner)
+		gameStore.updateStore('minersAmount', gameStore.minersAmount + 1)
 	}
 
   return (
     <div className="App" >
       <header className="App-header">
-				<Miner onSuccess={minerProfit} amount={gameState.minersAmount} timer={150} profit={gameState.minersProfit}/>
-				<BuyMinerButton buyMiner={buyMiner} amount={gameState.minersAmount} balance={gameState.balance}/>
-				<p>Заработок с клика: {gameState.clickCost} $</p>
-				<p>Баланс: {gameState.balance} $</p>
+				<Miner onSuccess={minerProfit} amount={gameStore.minersAmount} timer={150} profit={gameStore.minersProfit}/>
+				<BuyMinerButton buyMiner={buyMiner} amount={gameStore.minersAmount} balance={gameStore.balance}/>
+				<p>Заработок с клика: {gameStore.clickCost} $</p>
+				<p>Баланс: {gameStore.balance} $</p>
 				<div onClick={earnMoney}>
 					<img src={logo} className="App-logo" alt="logo"/>
 				</div>
-				<Link to="/Clicker/shop">Магазин</Link>
-				<button disabled={upgradeCost() > gameState.balance} onClick={buyUpgrade}>
-					Купить улучшение за {upgradeCost()} $
+				<button>
+					<Link to="/shop">Магазин</Link>
+				</button>
+				<button disabled={gameStore.upgradeCost > gameStore.balance} onClick={buyUpgrade}>
+					Купить улучшение за {gameStore.upgradeCost} $
 				</button>
       </header>
     </div>
   );
-}
+}));
 
 export default Main;
