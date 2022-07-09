@@ -1,6 +1,5 @@
 import React from 'react';
 import { observer, inject } from "mobx-react";
-import { Link } from "react-router-dom";
 import logo from '@/logo.svg';
 
 import Miner from '@/components/miner';
@@ -36,13 +35,9 @@ const Main = inject("gameStore")(observer((props: {gameStore?: GameStore}) => {
 				<Miner onSuccess={minerProfit} amount={gameStore.minersAmount} timer={150} profit={gameStore.minersProfit}/>
 				<BuyMinerButton buyMiner={buyMiner} amount={gameStore.minersAmount} balance={gameStore.balance}/>
 				<p>Заработок с клика: {gameStore.clickCost} $</p>
-				<p>Баланс: {gameStore.balance} $</p>
 				<div onClick={earnMoney}>
 					<img src={logo} className="App-logo" alt="logo"/>
 				</div>
-				<button>
-					<Link to="/shop">Магазин</Link>
-				</button>
 				<button disabled={gameStore.upgradeCost > gameStore.balance} onClick={buyUpgrade}>
 					Купить улучшение за {gameStore.upgradeCost} $
 				</button>

@@ -9,8 +9,7 @@ import './index.css';
 import reportWebVitals from '@/reportWebVitals';
 import { Provider } from "mobx-react";
 
-import Main from '@/pages/main';
-import Shop from '@/pages/shop';
+import pages from '@/pages/index';
 
 import GameStore from '@/store';
 
@@ -27,8 +26,8 @@ root.render(
 		<React.StrictMode>
 			<Provider {...stores}>
 				<Routes>
-					<Route path="*" element={<Main />} />
-					<Route path="/shop" element={<Shop />} />
+					<Route path="*" element={<pages.Main />} />
+					<Route path="/shop" element={<pages.Shop />} />
 				</Routes>
 			</Provider>
 		</React.StrictMode>
