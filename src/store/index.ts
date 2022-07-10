@@ -17,6 +17,9 @@ export default class GameStore {
   minersProfit!: number;
 
 	@observable
+	casesAmount!: number;
+
+	@observable
 	version!: number;
 
   constructor() {

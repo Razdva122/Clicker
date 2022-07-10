@@ -7,5 +7,6 @@ export const defaultGameState: IGameState = {
 	clickCost: 1,
 	minersAmount: 0,
 	minersProfit: 5,
-	version: 3
+	casesAmount: 0,
+	version: 4
 };

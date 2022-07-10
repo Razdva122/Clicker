@@ -3,6 +3,7 @@ export interface IGameState {
 	clickCost: number;
 	minersAmount: number;
 	minersProfit: number;
+	casesAmount: number;
 	version: number;
 }
 
