@@ -1,4 +1,5 @@
 import React, { FC } from 'react';
+import { Button } from 'antd';
 import { IBuyMinerButtonProps } from './interface';
 import { COST_OF_MINERS } from './const';
 
@@ -10,9 +11,9 @@ const BuyMinerButton: FC<IBuyMinerButtonProps> = ({amount, balance, buyMiner}) =
 	}
 
 	return (
-		<button disabled={currentMinerCost > balance} onClick={() => buyMiner(currentMinerCost)}>
+		<Button disabled={currentMinerCost > balance} shape={'round'} onClick={() => buyMiner(currentMinerCost)}>
 			Купить майнер за {currentMinerCost} $
-		</button>
+		</Button>
 	)
 };
 

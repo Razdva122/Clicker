@@ -4,6 +4,8 @@ import { observer, inject } from "mobx-react";
 
 import BuyMinerButton from '@/components/buyMinerButton';
 
+import { Button } from 'antd';
+
 import './style.css';
 
 import GameStore from '@/store';
@@ -29,12 +31,12 @@ const Shop = inject("gameStore")(observer((props: {gameStore?: GameStore}) => {
 	return (
 		<div className='Shop'> 
 			<BuyMinerButton buyMiner={buyMiner} amount={gameStore.minersAmount} balance={gameStore.balance}/>
-			<button disabled={gameStore.upgradeCost > gameStore.balance} onClick={buyUpgrade}>
+			<Button disabled={gameStore.upgradeCost > gameStore.balance} shape={'round'} onClick={buyUpgrade}>
 				Купить улучшение за {gameStore.upgradeCost} $
-			</button>
-			<button disabled={gameStore.balance < 1000} onClick={buyCase}>
+			</Button>
+			<Button disabled={gameStore.balance < 1000} shape={'round'} onClick={buyCase}>
 				Купить кейс за 1000 $
-			</button>
+			</Button>
 		</div>
 	)
 }));

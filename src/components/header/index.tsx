@@ -3,6 +3,8 @@ import { observer, inject } from "mobx-react";
 
 import { Link } from "react-router-dom";
 
+import { Button } from 'antd';
+
 import GameStore from '@/store';
 
 import './style.css';
@@ -12,15 +14,15 @@ const Header = inject("gameStore")(observer((props: {gameStore?: GameStore}) => 
 
 	return (
 		<div className='Header'>
-			<button>
+			<Button shape={'round'}>
 				<Link to="/">Главная</Link>
-			</button>
+			</Button>
 			<div>
 				Баланс: {gameStore.balance} $
 			</div>
-			<button>
+			<Button shape={'round'}>
 				<Link to="/shop">Магазин</Link>
-			</button>
+			</Button>
 		</div>
 	)
 }));

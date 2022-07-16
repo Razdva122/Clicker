@@ -6,6 +6,7 @@ import {
   Route
 } from "react-router-dom";
 import './index.css';
+import 'antd/dist/antd.min.css';
 import reportWebVitals from '@/reportWebVitals';
 import { Provider } from "mobx-react";
 
